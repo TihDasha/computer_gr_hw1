@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<HTML>
+<BODY>
+<canvas id='hw_1' width='500' height='400'/>
+<script>
+let canvas = document.getElementById('hw_1');
+let context = canvas.getContext('2d');
+context.lineCap = 'round';
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+class Drop{
+  x;
+  pos;
+  size;
+
+  /*constructor(x, pos, size){
+    this.x = x;
+    this.pos = pos;
+    this.size = size;
+  }*/
+
+  constructor(){
+    this.x = 10;
+    this.pos = 0;
+    this.size = 3;
+  }
+
+   fall(){
+    context.fillStyle = '#FFFFFF';
+  for(let i = 1; i < 10; i++){
+    context.fillRect(this.x, this.pos+i*this.size, 1*this.size, 1.5*this.size);}
+    this.pos+=getRandomInt(1,10);
+    context.fillStyle = '#4682B4';
+    for(let i = 1; i < 10; i++){
+    context.fillRect(this.x, this.pos+i*this.size, 1*this.size, 1.5*this.size);}
+  }
+}
+
+var rain = new Array(200);
+for(let i = 0; i < 200; i++){
+  rain[i] = new Array(15);
+  for(let j = 0; j< 15; j++){
+    rain[i][j] = new Drop();
+    rain[i][j].x += i*getRandomInt(30, 70);
+    rain[i][j].pos -= getRandomInt(10, 700);
+  }
+}
+
+for(let i = 0; i<200; i++){
+  for(let j = 0; j < 15; j++){
+setInterval( function raining(){
+  rain[i][j].fall();
+  },50);}}
+
+
+</script>
+</BODY>
+</HTML>
